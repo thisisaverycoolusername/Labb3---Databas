@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SkolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Betyg">
+          <Key>
+            <PropertyRef Name="BetygID" />
+          </Key>
+          <Property Name="BetygID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="KursID" Type="int" />
+          <Property Name="LarareID" Type="int" />
+          <Property Name="Betyg" Type="varchar" MaxLength="2" />
+          <Property Name="SattDatum" Type="date" />
+        </EntityType>
+        <EntityType Name="Kurser">
+          <Key>
+            <PropertyRef Name="KursID" />
+          </Key>
+          <Property Name="KursID" Type="int" Nullable="false" />
+          <Property Name="Mattematik" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="Förnamn" Type="varchar" MaxLength="255" />
+          <Property Name="Efternamn" Type="varchar" MaxLength="255" />
+          <Property Name="Personnummer" Type="varchar" MaxLength="12" />
+          <Property Name="Befattning" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Studenter">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Förnamn" Type="varchar" MaxLength="255" />
+          <Property Name="Efternamn" Type="varchar" MaxLength="255" />
+          <Property Name="Personnummer" Type="varchar" MaxLength="12" />
+          <Property Name="Klass" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Betyg__KursID__403A8C7D">
+          <End Role="Kurser" Type="Self.Kurser" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurser">
+              <PropertyRef Name="KursID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Betyg__LarareID__412EB0B6">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="LarareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Betyg__StudentID__3F466844">
+          <End Role="Studenter" Type="Self.Studenter" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studenter">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SkolaModelStoreContainer">
+          <EntitySet Name="Betyg" EntityType="Self.Betyg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kurser" EntityType="Self.Kurser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studenter" EntityType="Self.Studenter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Betyg__KursID__403A8C7D" Association="Self.FK__Betyg__KursID__403A8C7D">
+            <End Role="Kurser" EntitySet="Kurser" />
+            <End Role="Betyg" EntitySet="Betyg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Betyg__LarareID__412EB0B6" Association="Self.FK__Betyg__LarareID__412EB0B6">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="Betyg" EntitySet="Betyg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Betyg__StudentID__3F466844" Association="Self.FK__Betyg__StudentID__3F466844">
+            <End Role="Studenter" EntitySet="Studenter" />
+            <End Role="Betyg" EntitySet="Betyg" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SkolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Betyg">
+          <Key>
+            <PropertyRef Name="BetygID" />
+          </Key>
+          <Property Name="BetygID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="KursID" Type="Int32" />
+          <Property Name="LarareID" Type="Int32" />
+          <Property Name="Betyg1" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SattDatum" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Kurser" Relationship="Self.FK__Betyg__KursID__403A8C7D" FromRole="Betyg" ToRole="Kurser" />
+          <NavigationProperty Name="Personal" Relationship="Self.FK__Betyg__LarareID__412EB0B6" FromRole="Betyg" ToRole="Personal" />
+          <NavigationProperty Name="Studenter" Relationship="Self.FK__Betyg__StudentID__3F466844" FromRole="Betyg" ToRole="Studenter" />
+        </EntityType>
+        <EntityType Name="Kurser">
+          <Key>
+            <PropertyRef Name="KursID" />
+          </Key>
+          <Property Name="KursID" Type="Int32" Nullable="false" />
+          <Property Name="Mattematik" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Betygs" Relationship="Self.FK__Betyg__KursID__403A8C7D" FromRole="Kurser" ToRole="Betyg" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="Förnamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Efternamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Personnummer" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Befattning" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Betygs" Relationship="Self.FK__Betyg__LarareID__412EB0B6" FromRole="Personal" ToRole="Betyg" />
+        </EntityType>
+        <EntityType Name="Studenter">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Förnamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Efternamn" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Personnummer" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Klass" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Betygs" Relationship="Self.FK__Betyg__StudentID__3F466844" FromRole="Studenter" ToRole="Betyg" />
+        </EntityType>
+        <Association Name="FK__Betyg__KursID__403A8C7D">
+          <End Role="Kurser" Type="Self.Kurser" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kurser">
+              <PropertyRef Name="KursID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="KursID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Betyg__LarareID__412EB0B6">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="LarareID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Betyg__StudentID__3F466844">
+          <End Role="Studenter" Type="Self.Studenter" Multiplicity="0..1" />
+          <End Role="Betyg" Type="Self.Betyg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studenter">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Betyg">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SkolaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Betygs" EntityType="Self.Betyg" />
+          <EntitySet Name="Kursers" EntityType="Self.Kurser" />
+          <EntitySet Name="Personals" EntityType="Self.Personal" />
+          <EntitySet Name="Studenters" EntityType="Self.Studenter" />
+          <AssociationSet Name="FK__Betyg__KursID__403A8C7D" Association="Self.FK__Betyg__KursID__403A8C7D">
+            <End Role="Kurser" EntitySet="Kursers" />
+            <End Role="Betyg" EntitySet="Betygs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Betyg__LarareID__412EB0B6" Association="Self.FK__Betyg__LarareID__412EB0B6">
+            <End Role="Personal" EntitySet="Personals" />
+            <End Role="Betyg" EntitySet="Betygs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Betyg__StudentID__3F466844" Association="Self.FK__Betyg__StudentID__3F466844">
+            <End Role="Studenter" EntitySet="Studenters" />
+            <End Role="Betyg" EntitySet="Betygs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SkolaModelStoreContainer" CdmEntityContainer="SkolaEntities">
+          <EntitySetMapping Name="Betygs">
+            <EntityTypeMapping TypeName="SkolaModel.Betyg">
+              <MappingFragment StoreEntitySet="Betyg">
+                <ScalarProperty Name="BetygID" ColumnName="BetygID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="LarareID" ColumnName="LarareID" />
+                <ScalarProperty Name="Betyg1" ColumnName="Betyg" />
+                <ScalarProperty Name="SattDatum" ColumnName="SattDatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kursers">
+            <EntityTypeMapping TypeName="SkolaModel.Kurser">
+              <MappingFragment StoreEntitySet="Kurser">
+                <ScalarProperty Name="KursID" ColumnName="KursID" />
+                <ScalarProperty Name="Mattematik" ColumnName="Mattematik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personals">
+            <EntityTypeMapping TypeName="SkolaModel.Personal">
+              <MappingFragment StoreEntitySet="Personal">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
+                <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />
+                <ScalarProperty Name="Personnummer" ColumnName="Personnummer" />
+                <ScalarProperty Name="Befattning" ColumnName="Befattning" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studenters">
+            <EntityTypeMapping TypeName="SkolaModel.Studenter">
+              <MappingFragment StoreEntitySet="Studenter">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Förnamn" ColumnName="Förnamn" />
+                <ScalarProperty Name="Efternamn" ColumnName="Efternamn" />
+                <ScalarProperty Name="Personnummer" ColumnName="Personnummer" />
+                <ScalarProperty Name="Klass" ColumnName="Klass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
